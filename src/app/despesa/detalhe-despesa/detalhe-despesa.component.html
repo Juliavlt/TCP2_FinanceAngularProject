@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<div class="Detalhamento">
+  <h4> Despesas </h4>
+  <hr>
+  <table>
+      <tbody *ngIf="user?.despesas?.length>0">
+          <tr *ngFor="let despesa of user?.despesas">
+              <td >{{despesa.categoria}}</td>
+              <td >{{despesa.valor | currency}}</td>
+              <button type="button" routerLink="/atualizar-despesa/{{despesa.id}}">Atualizar</button>
+              <button type="button" (click)="excluir(despesa.id)">Excluir</button>
+          </tr>
+          <h4 >Valor total:</h4>
+          <div><strong>
+               <p>{{user?.totalDespesas| currency}}</p></strong>
+          </div>
+      </tbody>
+  </table>
+</div>
+<button type="button" routerLink="/cadastro-despesa/{{idUser}}" >Adicionar</button>
+
+<h4>Cadastrar nova categoria:
+  <input [(ngModel)]="novaCategoria"name="categoria" type="text">
+  <button name="categoria"  (click)="cadastrarCategoria(this.novaCategoria)">Criar!</button>
+</h4>

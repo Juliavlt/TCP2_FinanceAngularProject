@@ -1,0 +1,13 @@
+<div>
+  <div>
+      <div>
+
+        <form [formGroup]="loginForm">
+          <input type="text" maxlength="10" id="login" formControlName="username" placeholder="Login"> <br>
+          <input type="password" maxlength="6" id="senha" formControlName="password" placeholder="Senha"> <br><br>
+          <button type="button" [routerLink]="['/cadastro-usuario']" routerLinkActive="router-link-active" > Cadastrar </button>
+          <button type="button" (click)="autenticar()" > Acessar </button>
+        </form>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<ng-container *ngIf="exists">
+  <div>
+    <form [formGroup]="despesaForm">
+
+      <h4>Categoria</h4>
+      <select name="categoria" formControlName="categoria">
+        <option value="SAUDE">Saúde</option>
+        <option value="TRANSPORTE">Transporte</option>
+        <option value="RESTAURANTE">Alimentação</option>
+        <option value="EDUCACAO">Educação</option>
+        <option value="OUTRO">Outros</option>
+      </select>
+
+        <h4>Valor</h4>
+        <input name="valor" formControlName="valor" type="number" placeholder="R$"><br>
+
+        <h4>Data</h4>
+        <input name="data"formControlName="data"  type="date"><br>
+      </form>
+  </div>
+  <button (click)="atualizar()" type="button"> Atualizar</button>
+  <button (click)="voltar()" type="button"> Voltar</button>
+
+</ng-container>
+
+
+
+
+

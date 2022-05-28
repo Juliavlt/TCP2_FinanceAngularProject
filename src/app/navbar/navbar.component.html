@@ -1,0 +1,20 @@
+
+<div>
+  <h4>Home</h4>
+  <button type="button" [routerLink]="['/']" routerLinkActive="router-link-active">Acessar</button>
+</div>
+
+<div>
+  <h4>Menu</h4>
+  <button type="button"  routerLink="/menu-principal/{{idUser}}" >Acessar</button>
+</div>
+
+<div>
+    <h4>Receita</h4>
+    <button type="button" routerLink="/detalhe-receita/{{idUser}}">Acessar</button>
+  </div>
+
+<div>
+    <h4>Despesa</h4>
+    <button type="button"  routerLink="/detalhe-despesa/{{idUser}}" >Acessar</button>
+</div>

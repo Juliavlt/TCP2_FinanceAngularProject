@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+<div class="Detalhamento">
+  <h4> Receitas </h4>
+  <hr>
+  <table>
+      <tbody *ngIf="user?.receitas?.length>0">
+          <tr *ngFor="let receita of user?.receitas">
+              <td >{{receita?.categoria}}</td>
+              <td >{{receita?.valor | currency}}</td>
+              <button type="button" routerLink="/atualizar-receita/{{receita.id}}">Atualizar</button>
+              <button type="button" (click)="excluir(receita.id)">Excluir</button>
+
+          </tr>
+          <h4 >Valor total:</h4>
+          <div><strong>
+               <p >{{user?.totalReceitas| currency}}</p></strong>
+          </div>
+      </tbody>
+  </table>
+</div>
+
+<button type="button" routerLink="/cadastro-receita/{{idUser}}" >Adicionar receita</button>
+
+<h4>Cadastrar nova categoria:
+  <input [(ngModel)]="novaCategoria" name="categoria" type="text">
+  <button name="categoria"  (click)="cadastrarCategoria(this.novaCategoria)">Criar!</button>
+</h4>

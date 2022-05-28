@@ -1,0 +1,20 @@
+<form>
+
+  <h4>Categoria</h4>
+  <select name="categoria" [(ngModel)]="this?.receita.categoria">
+    <option value="SALARIO">Salário</option>
+    <option value="RENDA EXTRA">Renda extra</option>
+    <option value="OUTRO">Outros</option>
+
+  </select>
+
+    <h4>Valor</h4>
+    <input name="valor" [(ngModel)]="this?.receita.valor" type="number" placeholder="R$" ><br>
+
+    <h4>Data</h4>
+    <input name="data" [(ngModel)]="this?.receita.dataMovimentacao" type="date"><br>
+</form>
+
+<button (click)="atualizar()" type="button">Atualizar</button>
+<button (click)="voltar()" type="button"> Voltar</button>
+
