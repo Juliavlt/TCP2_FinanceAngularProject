@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { User } from './../../../model/user';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -11,7 +12,7 @@ import { UserService } from 'src/service/user.service';
 })
 export class CadastroUsuarioComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private readonly route: Router, private service: UserService ){}
+  constructor(private formBuilder: FormBuilder, private readonly route: Router, private service: UserService,private location:Location ){}
 
   user?: string;
   pass?: string;
@@ -47,6 +48,7 @@ export class CadastroUsuarioComponent implements OnInit {
         this.route.navigate(['/login'])});
     }else{
       alert("Dados incorretos!")
+      this.location.back();
     }
   }
 

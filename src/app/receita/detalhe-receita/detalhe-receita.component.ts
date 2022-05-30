@@ -48,9 +48,6 @@ export class DetalheReceitaComponent implements OnInit {
     cadastrarCategoria(categoria: string){
       this.categoryService.createCategory(categoria, this.idUser, 2).subscribe((data)=>{
         alert("Categoria cadastrada com sucesso!");
-      },
-      err => {
-        console.log("erro", err);
       })
     }
 }

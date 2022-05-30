@@ -42,7 +42,6 @@ ngOnInit(): void {
 }
 
 configurarFormulario(){
-  this.getCategoriasGlobais();
   this.receitaForm = this.formBuilder.group({
     categoria: [null, Validators.required],
     valor: [null, Validators.required],
@@ -55,9 +54,12 @@ getCategoriasGlobais(){
   this.categoryService.getCategories(this.idUser, 2).subscribe((data)=>{
     this.categoriasGlobais = data.categoriasGlobais;
     this.categoriasDoUsuario = data.categoriasDoUsuario;
-    this.exists = true;
-  }, err => {
-    console.log("erro", err);
+    if(this.categoriasDoUsuario.length == 0 && this.categoriasGlobais.length==0){
+      alert("Crie uma categoria para continuar!")
+      this.location.back();
+    } else{
+      this.exists = true;
+    }
   })
 }
 

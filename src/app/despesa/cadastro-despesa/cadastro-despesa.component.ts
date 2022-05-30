@@ -7,6 +7,7 @@ import { Location } from "@angular/common";
 import { UserInfo } from 'src/model/userInfo';
 import { CategoryService } from 'src/service/categoryService';
 import { Category } from 'src/model/category';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Component({
@@ -43,7 +44,6 @@ export class CadastroDespesaComponent implements OnInit{
   }
 
   configurarFormulario(){
-    this.getCategoriasGlobais();
     this.despesaForm = this.formBuilder.group({
     categoria: [null, Validators.required],
     valor: [null, Validators.required],
@@ -69,9 +69,12 @@ export class CadastroDespesaComponent implements OnInit{
     this.categoryService.getCategories(this.idUser, 1).subscribe((data)=>{
       this.categoriasGlobais = data.categoriasGlobais;
       this.categoriasDoUsuario = data.categoriasDoUsuario;
-      this.exists = true;
-    }, err => {
-      console.log("erro", err);
+      if(this.categoriasDoUsuario.length == 0 && this.categoriasGlobais.length==0){
+        alert("Crie uma categoria para continuar!")
+        this.location.back();
+      } else{
+        this.exists = true;
+      }
     })
   }
 

@@ -37,12 +37,8 @@ export class LoginComponent implements OnInit {
     this.service.getUser(this.loginForm.get("username").value, this.loginForm.get("password").value).subscribe((user: UserInfo)=> {
       this.user = user
       localStorage.setItem("id", JSON.stringify(this.user.id))
+      alert('Usuario logado com sucesso.')
       this.rota = '/menu-principal/'+user.id.toString();
       this.rotas.navigateByUrl(this.rota);
-      alert('Usuario logado com sucesso.')
-  }, (erro)=>{
-      this.rota = '/login';
-      alert('Login ou senha inválido.')
-  },()=>{})
-  }
+  })}
 }

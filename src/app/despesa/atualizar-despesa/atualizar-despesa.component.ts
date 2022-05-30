@@ -66,9 +66,7 @@ export class AtualizarDespesaComponent implements OnInit {
       this.despesa = despesa
       this.location.back()
       alert('Despesa atualizada com sucesso :)')
-     }), (erro)=>{
-        alert('Não foi possível atualizar a despesa :(')
-      },()=>{}
+     })
 
     }
 
