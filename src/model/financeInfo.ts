@@ -5,5 +5,5 @@ export interface FinanceInfo{
   valor?:number
   categoria?:string;
   createdAt?: Date;
-  modifiedAt?:Date;
+  modifiedAt?: Date;
 }

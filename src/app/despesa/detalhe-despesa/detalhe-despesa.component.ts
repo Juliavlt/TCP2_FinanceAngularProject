@@ -38,10 +38,7 @@ export class DetalheDespesaComponent implements OnInit {
   excluir(id:number){
     this.service.deleteFinanca(id).subscribe(()=> {
     alert('Usuario excluido com sucesso.')
-  }, (erro)=>{
-      alert('Despesa não pôde ser excluída.')
-  },()=>{})
-  }
+  })}
 
   cadastrarCategoria(categoria: string){
     this.categoryService.createCategory(categoria, this.idUser, 1).subscribe((data)=>{

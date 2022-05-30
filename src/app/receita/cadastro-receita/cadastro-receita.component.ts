@@ -37,7 +37,7 @@ exists?:boolean;
 ngOnInit(): void {
   this.idUser = Number(this.rota.snapshot.paramMap.get("id"));
   this.exists=false
-  this.getCategoriasGlobais();
+  this.getCategorias();
   this.configurarFormulario();
 }
 
@@ -50,8 +50,9 @@ configurarFormulario(){
   })
 }
 
-getCategoriasGlobais(){
+getCategorias(){
   this.categoryService.getCategories(this.idUser, 2).subscribe((data)=>{
+    console.log(data);
     this.categoriasGlobais = data.categoriasGlobais;
     this.categoriasDoUsuario = data.categoriasDoUsuario;
     if(this.categoriasDoUsuario.length == 0 && this.categoriasGlobais.length==0){

@@ -44,7 +44,7 @@ export class CadastroUsuarioComponent implements OnInit {
       this.service
       .createUser(this.newUser)
       .subscribe( (data) =>{
-       console.log(data)
+        alert("Usuário cadastrado com sucesso!")
         this.route.navigate(['/login'])});
     }else{
       alert("Dados incorretos!")

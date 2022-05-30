@@ -39,7 +39,7 @@ export class CadastroDespesaComponent implements OnInit{
   ngOnInit(): void {
     this.idUser = Number(this.rota.snapshot.paramMap.get("id"));
     this.exists=false
-    this.getCategoriasGlobais();
+    this.getCategorias();
     this.configurarFormulario();
   }
 
@@ -65,7 +65,7 @@ export class CadastroDespesaComponent implements OnInit{
     .subscribe( () => this.route.navigate(['/detalhe-despesa/'+this.idUser]));
   }
 
-  getCategoriasGlobais(){
+  getCategorias(){
     this.categoryService.getCategories(this.idUser, 1).subscribe((data)=>{
       this.categoriasGlobais = data.categoriasGlobais;
       this.categoriasDoUsuario = data.categoriasDoUsuario;

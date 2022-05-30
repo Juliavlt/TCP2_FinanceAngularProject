@@ -69,18 +69,13 @@ export class AtualizarReceitaComponent implements OnInit {
       this.receita = receita
       this.location.back()
       alert('Receita atualizada com sucesso :)')
-     }), error => {console.log('erro')
-        alert('Não foi possível atualizar a receita :(')
-      },()=>{}
-
+     })
     }
 
     getCategoriasGlobais(){
       this.categoryService.getCategories(this.idUser, 2).subscribe((data)=>{
         this.categoriasGlobais = data.categoriasGlobais;
         this.categoriasDoUsuario = data.categoriasDoUsuario;
-      }, err => {
-        console.log("erro", err);
       })
     }
 
