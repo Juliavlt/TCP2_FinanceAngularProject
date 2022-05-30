@@ -5,6 +5,7 @@ import { Financa } from 'src/model/financa.model';
 import { UserInfo } from 'src/model/userInfo';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/service/user.service';
+import { CategoryService } from 'src/service/categoryService';
 
 
 @Component({
@@ -22,6 +23,7 @@ export class DetalheDespesaComponent implements OnInit {
   constructor(
     private service: FinancaService,
     private userService: UserService,
+    private categoryService: CategoryService,
     private readonly rota: ActivatedRoute) {}
 
   ngOnInit(){
@@ -42,6 +44,12 @@ export class DetalheDespesaComponent implements OnInit {
   }
 
   cadastrarCategoria(categoria: string){
-    this.userService.createCategory(categoria, this.idUser, 1);
+    this.categoryService.createCategory(categoria, this.idUser, 1).subscribe((data)=>{
+      alert("Categoria cadastrada com sucesso!");
+    },
+    err => {
+      console.log("erro", err);
+    })
+
   }
 }

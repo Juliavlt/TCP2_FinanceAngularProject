@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
 import { UserInfo } from 'src/model/userInfo';
+import { CategoryService } from 'src/service/categoryService';
+import { Category } from 'src/model/category';
 
 
 @Component({
@@ -14,32 +16,41 @@ import { UserInfo } from 'src/model/userInfo';
 })
 export class CadastroDespesaComponent implements OnInit{
 
-constructor(private formBuilder: FormBuilder,
-  private readonly route: Router,
-  private service:FinancaService,
-  private readonly rota: ActivatedRoute,
-   private location:Location
-  ){}
-
-idUser?: number;
-despesaForm?: FormGroup;
-despesa?: Financa;
-user: UserInfo;
+  idUser?: number;
+  despesaForm?: FormGroup;
+  despesa?: Financa;
+  user: UserInfo;
+  categoriasGlobais?:Category[];
+  categoriasDoUsuario?: Category[];
+  exists?:boolean;
 
 
-ngOnInit(): void {
-  this.idUser = Number(this.rota.snapshot.paramMap.get("id"));
-  this.configurarFormulario();
-}
+  constructor(private formBuilder: FormBuilder,
+    private readonly route: Router,
+    private service:FinancaService,
+    private readonly rota: ActivatedRoute,
+    private categoryService: CategoryService,
+    private location:Location
+    ){}
 
-configurarFormulario(){
-  this.despesaForm = this.formBuilder.group({
+
+
+  ngOnInit(): void {
+    this.idUser = Number(this.rota.snapshot.paramMap.get("id"));
+    this.exists=false
+    this.getCategoriasGlobais();
+    this.configurarFormulario();
+  }
+
+  configurarFormulario(){
+    this.getCategoriasGlobais();
+    this.despesaForm = this.formBuilder.group({
     categoria: [null, Validators.required],
     valor: [null, Validators.required],
     data: [null, [Validators.required]
   ]
   })
-}
+  }
 
   criar(){
     this.despesa = {
@@ -49,12 +60,19 @@ configurarFormulario(){
       categoria: this.despesaForm.get("categoria").value,
       dataMovimentacao: this.despesaForm.get("data").value,
     };
-
-    console.log(this.despesa)
-
     this.service
     .postFinancas(this.despesa)
     .subscribe( () => this.route.navigate(['/detalhe-despesa/'+this.idUser]));
+  }
+
+  getCategoriasGlobais(){
+    this.categoryService.getCategories(this.idUser, 1).subscribe((data)=>{
+      this.categoriasGlobais = data.categoriasGlobais;
+      this.categoriasDoUsuario = data.categoriasDoUsuario;
+      this.exists = true;
+    }, err => {
+      console.log("erro", err);
+    })
   }
 
   voltar(){

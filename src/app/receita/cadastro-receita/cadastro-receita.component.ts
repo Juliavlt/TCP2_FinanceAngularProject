@@ -8,6 +8,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from "@angular/common";
 import { UserService } from 'src/service/user.service';
 import { Category } from 'src/model/category';
+import { CategoryService } from 'src/service/categoryService';
+import { take } from 'rxjs';
 
 
 @Component({
@@ -17,17 +19,18 @@ import { Category } from 'src/model/category';
 })
 export class CadastroReceitaComponent implements OnInit{
 
-constructor(  private readonly rota: ActivatedRoute,
+constructor(private readonly rota: ActivatedRoute,
   private formBuilder: FormBuilder,
   private readonly route: Router,
   private service:FinancaService,
-  private userService: UserService,
-  private location:Location){}
+  private categoryService: CategoryService,
+  private location:Location)
+{}
 
 idUser?: number;
 receitaForm?: FormGroup;
 receita?: Financa;
-categoriasGlobais?: Category[];
+categoriasGlobais?:Category[];
 categoriasDoUsuario?: Category[];
 exists?:boolean;
 
@@ -49,13 +52,13 @@ configurarFormulario(){
 }
 
 getCategoriasGlobais(){
-  this.userService.getCategories(this.idUser, 2).subscribe((data)=>{
+  this.categoryService.getCategories(this.idUser, 2).subscribe((data)=>{
     this.categoriasGlobais = data.categoriasGlobais;
     this.categoriasDoUsuario = data.categoriasDoUsuario;
     this.exists = true;
-    console.log(data)
+  }, err => {
+    console.log("erro", err);
   })
-
 }
 
 criar(){

@@ -1,19 +1,14 @@
-<div>
+<ng-container *ngIf="exists">
   <form [formGroup]="despesaForm">
 
-    <h4>Minhas categorias:</h4>
-    <select name="categoria" formControlName="categoria">
-      <option value="SAUDE">Saúde</option>
-      <option value="TRANSPORTE">Transporte</option>
-      <option value="RESTAURANTE">Alimentação</option>
-      <option value="EDUCACAO">Educação</option>
-      <option value="OUTRO">Outros</option>
-    </select>
+  <h4>Minhas categorias:</h4>
+  <select name="categoria" formControlName="categoria">
+    <option *ngFor="let categoria of categoriasDoUsuario" value="{{categoria.categoria}}"> {{categoria.categoria}}</option>
+  </select>
 
-    <h4>Categorias globais:</h4>
-    <select name="categoria" formControlName="categoria">
-      <option value="SAUDE">Saúde</option>
-      <option value="TRANSPORTE">Transporte</option>
+  <h4>Categorias globais:</h4>
+    <select  name="categoria" formControlName="categoria">
+      <option *ngFor="let categoria of categoriasGlobais" value="{{categoria.categoria}}"> {{categoria.categoria}}</option>
     </select>
 
       <h4>Valor</h4>
@@ -23,7 +18,6 @@
       <input name="data" formControlName="data"  type="date"><br>
 
     </form>
-</div>
-<button [disabled]="despesaForm.invalid" (click)="criar()" type="button"> Cadastrar despesa</button>
-<button (click)="voltar()" type="button"> Voltar</button>
-
+  <button [disabled]="despesaForm.invalid" (click)="criar()" type="button"> Cadastrar despesa</button>
+  <button (click)="voltar()" type="button"> Voltar</button>
+</ng-container>

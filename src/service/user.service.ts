@@ -1,19 +1,19 @@
 import { User } from './../model/user';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaderResponse, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import {  catchError, Observable, throwError } from 'rxjs';
 import { UserInfo } from 'src/model/userInfo';
-import { Categories } from 'src/model/categories';
+import { Location } from '@angular/common';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private location: Location) {}
 
   baseUrlAuthenticate = 'http://localhost:8080/SC3008487/user/authenticate';
   baseUrl = 'http://localhost:8080/SC3008487/user';
-  baseUrlCategory = 'http://localhost:8080/SC3008487/category';
 
   public getUser(username: string, password: string): Observable<UserInfo> {
     const param = new HttpParams()
@@ -27,26 +27,26 @@ export class UserService {
     return this.http.get(this.baseUrl + '/' + userId);
   }
 
-  public createUser(user: User): Observable<User> {
+  public createUser(user: User): Observable<UserInfo> {
     let body = new HttpParams();
     body = body.set('user', String(user.username));
     body = body.set('pass', user.password);
-    return this.http.post(this.baseUrl, user);
+    return this.http.post(this.baseUrl, user)
+    .pipe(catchError((err) => {
+      let erro = this.verifyError(err.status);
+      alert(erro)
+      this.location.back();
+      return throwError(err);
+    }))
   }
 
-  public createCategory(categoria: string, idUser: number, tipo:number): Observable<any> {
-    let body = new HttpParams();
-    body = body.set('categoria', categoria);
-    body = body.set('tipo', tipo)
-    body = body.set('idUser', idUser);
-    return this.http.post(this.baseUrlCategory, body);
-  }
-
-  public getCategories(idUser:number, tipo:number): Observable<any> {
-    const param = new HttpParams()
-    .set('tipo', tipo)
-    .set('idUser', idUser);
-    const options = { params: param };
-    return this.http.get(this.baseUrlCategory, options);
+  verifyError(status): string{
+    if(status === 400){
+      return "Usúario já cadastrado!";
+    } else if (status === 404){
+      return "Página inexistente";
+    } else{
+      return "Dados inválidos!";
+    }
   }
 }

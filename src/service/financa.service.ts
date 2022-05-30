@@ -35,7 +35,7 @@ export class FinancaService {
     body = body.set("valor", financa.valor);
     return this.http.put(this.baseUrl+"/"+id, financa)
   }
-  getFinancas(idUser:number):Observable<any>{
+  getFinancas(idUser:number):Observable<Financas>{
     return this.http.get<Financas>(this.baseUrl+"/"+idUser);
   }
 

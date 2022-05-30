@@ -10,12 +10,13 @@ import { AppComponent } from './app.component';
 import { CadastroDespesaComponent } from './despesa/cadastro-despesa/cadastro-despesa.component';
 import { DetalheDespesaComponent } from './despesa/detalhe-despesa/detalhe-despesa.component';
 import { HomeComponent } from './home/home.component';
-import { MenuPrincipalComponent } from './menu-principal/menu-principal.component';
+import { MenuPrincipalComponent } from './usuario/menu-principal/menu-principal.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { CadastroReceitaComponent } from './receita/cadastro-receita/cadastro-receita.component';
 import { DetalheReceitaComponent } from './receita/detalhe-receita/detalhe-receita.component';
 import { CadastroUsuarioComponent } from './usuario/cadastro-usuario/cadastro-usuario.component';
 import { LoginComponent } from './usuario/login/login.component';
+import { CategoryService } from 'src/service/categoryService';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,8 @@ import { LoginComponent } from './usuario/login/login.component';
     CadastroDespesaComponent,
     CadastroUsuarioComponent,
     AtualizarDespesaComponent,
-    AtualizarReceitaComponent
-    ],
+    AtualizarReceitaComponent,
+      ],
   imports: [
     FormsModule,
     BrowserModule,

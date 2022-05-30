@@ -10,4 +10,5 @@ export interface UserInfo{
   totalDespesas?: number;
   totalReceitas?: number;
   total?: number;
+  erro?:string;
   }

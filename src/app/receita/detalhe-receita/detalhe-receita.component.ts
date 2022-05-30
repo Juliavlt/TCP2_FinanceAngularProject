@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/service/user.service';
 import { UserInfo } from 'src/model/userInfo';
 import { take } from 'rxjs';
+import { CategoryService } from 'src/service/categoryService';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class DetalheReceitaComponent implements OnInit {
   constructor(
     private service: FinancaService,
     private userService: UserService,
+    private categoryService: CategoryService,
     private readonly rota: ActivatedRoute) {}
 
   ngOnInit(){
@@ -36,7 +38,6 @@ export class DetalheReceitaComponent implements OnInit {
   }
 
   excluir(id:number){
-    console.log(id)
     this.service.deleteFinanca(id).subscribe(()=> {
     alert('Receita excluída com sucesso.')
     }, (erro)=>{
@@ -45,8 +46,8 @@ export class DetalheReceitaComponent implements OnInit {
     }
 
     cadastrarCategoria(categoria: string){
-      this.userService.createCategory(categoria, this.idUser, 2).pipe(take(1)).subscribe((data)=>{
-        console.log("sucesso", data);
+      this.categoryService.createCategory(categoria, this.idUser, 2).subscribe((data)=>{
+        alert("Categoria cadastrada com sucesso!");
       },
       err => {
         console.log("erro", err);

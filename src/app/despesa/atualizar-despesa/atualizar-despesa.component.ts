@@ -4,6 +4,8 @@ import { Financa } from 'src/model/financa.model';
 import { FinancaService } from 'src/service/financa.service';
 import { Location } from "@angular/common";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CategoryService } from 'src/service/categoryService';
+import { Category } from 'src/model/category';
 
 @Component({
   selector: 'app-atualizar-despesa',
@@ -14,20 +16,24 @@ export class AtualizarDespesaComponent implements OnInit {
 
   despesa?: Financa = {id:0, idUser: 0, tipo:1, categoria:"", dataMovimentacao: "", valor:1};
   idFinanca?: number;
+  idUser?: number;
   despesaForm?: FormGroup;
   exists:boolean = false;
+  categoriasGlobais?:Category[];
+  categoriasDoUsuario?: Category[];
 
   constructor(
     private readonly rota: ActivatedRoute,
     private location:Location,
     private formBuilder: FormBuilder,
+    private categoryService: CategoryService,
     private service:FinancaService)
     {}
 
-  idDespesaToUpdate:number;
-
   ngOnInit(): void {
     this.idFinanca = Number(this.rota.snapshot.paramMap.get("id"));
+    this.idUser = Number(localStorage.getItem("id"));
+    this.getCategoriasGlobais();
     this.getDespesa(this.idFinanca);
   }
 
@@ -64,6 +70,15 @@ export class AtualizarDespesaComponent implements OnInit {
         alert('Não foi possível atualizar a despesa :(')
       },()=>{}
 
+    }
+
+    getCategoriasGlobais(){
+      this.categoryService.getCategories(this.idUser, 1).subscribe((data)=>{
+        this.categoriasGlobais = data.categoriasGlobais;
+        this.categoriasDoUsuario = data.categoriasDoUsuario;
+      }, err => {
+        console.log("erro", err);
+      })
     }
 
   voltar(){

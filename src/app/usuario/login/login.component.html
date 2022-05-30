@@ -3,9 +3,9 @@
       <div>
 
         <form [formGroup]="loginForm">
-          <input type="text" maxlength="10" id="login" formControlName="username" placeholder="Login"> <br>
-          <input type="password" maxlength="6" id="senha" formControlName="password" placeholder="Senha"> <br><br>
-          <button type="button" [routerLink]="['/cadastro-usuario']" routerLinkActive="router-link-active" > Cadastrar </button>
+          <input type="text"  id="login" formControlName="username" placeholder="@email"> <br>
+          <input type="password" id="senha" formControlName="password" placeholder="senha"> <br><br>
+          <button type="button" [routerLink]="['/cadastro-usuario']"> Cadastrar </button>
           <button type="button" (click)="autenticar()" > Acessar </button>
         </form>
       </div>

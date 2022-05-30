@@ -20,6 +20,5 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.idUser = Number(localStorage.getItem("id"));
-    console.log(this.idUser)
   }
 }

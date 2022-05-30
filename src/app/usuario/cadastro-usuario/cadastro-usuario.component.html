@@ -3,13 +3,13 @@
   <h4>Sign in: </h4>
 
     <h4>Username</h4>
-    <input name="user" formControlName="user" type="text" placeholder="user" ><br>
+    <input name="user" formControlName="user" type="text" placeholder="@email" ><br>
 
     <h4>Password</h4>
-    <input name="pass" formControlName="pass"  type="text"><br>
+    <input name="pass" formControlName="pass"  type="password"><br>
 
     <h4>Confirm your password</h4>
-    <input name="confirmPass" formControlName="confirmPass"  type="text"><br>
+    <input name="confirmPass" formControlName="confirmPass"  type="password"><br>
 </form>
 
 <button [disabled]="userForm.invalid" (click)="cadastrar()" type="button">Cadastrar</button>

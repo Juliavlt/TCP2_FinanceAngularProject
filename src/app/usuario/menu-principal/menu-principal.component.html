@@ -2,7 +2,7 @@
 <div class="container">
 <div>
   <h4>Meu saldo</h4><br><br>
-  <p> {{ user ? (user.total) : 0| currency}} </p>
+  <p> {{ user ? (user?.total | currency) : 0 | currency}} </p>
   <br>
 </div>
 <div>

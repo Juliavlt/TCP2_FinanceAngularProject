@@ -1,5 +1,4 @@
-import { UserInfo } from './../../model/userInfo';
-import { Financa } from 'src/model/financa.model';
+import { UserInfo } from '../../../model/userInfo';
 import { Component, OnInit, Input } from '@angular/core';
 import { FinancaService } from 'src/service/financa.service';
 import { Financas } from 'src/model/financas.model';
@@ -13,10 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MenuPrincipalComponent implements OnInit {
 
-
-  listaFinancas: Financas;
-  user: UserInfo;
-  idUser: number;
+  user?: UserInfo;
+  idUser?: number;
 
   constructor(
     private service: FinancaService,
@@ -26,10 +23,6 @@ export class MenuPrincipalComponent implements OnInit {
 
   ngOnInit(){
     this.idUser = Number(this.rota.snapshot.paramMap.get("id"));
-    this.service.getFinancas(this.idUser).subscribe((financas: any) => {
-      this.listaFinancas = financas;
-    console.log(this.user)
-    });
     this.getUserInfos()
   }
 

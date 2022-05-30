@@ -6,4 +6,5 @@ export interface Financas{
   totalIncome?:number;
   receitasResponseList?: Financa[];
   despesasResponseList?: Financa[];
+  erro?:string;
   }
