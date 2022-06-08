@@ -68,7 +68,7 @@ export class FinancaService {
     }))
   }
 
-  deleteFinanca(id:number): Observable<Financa>{
+  deleteFinanca(id:number): Observable<any>{
     return this.http.delete<Financa>(this.baseUrl +"/"+ id)
     .pipe(catchError((err) => {
       let erro = this.verifyError(err);

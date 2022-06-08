@@ -15,7 +15,7 @@ export class UserService {
   baseUrlAuthenticate = 'http://localhost:8080/SC3008487/user/authenticate';
   baseUrl = 'http://localhost:8080/SC3008487/user';
 
-  public getUser(username: string, password: string): Observable<UserInfo> {
+  public getUser(username: string, password: string): Observable<any> {
     const param = new HttpParams()
     .set('user', username)
     .set('pass', password);
@@ -39,7 +39,7 @@ export class UserService {
     }))
   }
 
-  public createUser(user: User): Observable<UserInfo> {
+  public createUser(user: User): Observable<any> {
     let body = new HttpParams();
     body = body.set('user', String(user.username));
     body = body.set('pass', user.password);

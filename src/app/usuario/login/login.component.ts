@@ -13,7 +13,6 @@ export class LoginComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,public rotas: Router, private service: UserService) { }
 
-
   user?:UserInfo;
   username?: string;
   password?: string;
@@ -34,11 +33,10 @@ export class LoginComponent implements OnInit {
   }
 
   autenticar() {
-    this.service.getUser(this.loginForm.get("username").value, this.loginForm.get("password").value).subscribe((user: UserInfo)=> {
-      this.user = user
-      localStorage.setItem("id", JSON.stringify(this.user.id))
+    this.service.getUser(this.loginForm.get("username").value, this.loginForm.get("password").value).subscribe((userId: string)=> {
+      localStorage.setItem("id", userId)
       alert('Usuario logado com sucesso.')
-      this.rota = '/menu-principal/'+user.id.toString();
+      this.rota = '/menu-principal/'+userId;
       this.rotas.navigateByUrl(this.rota);
   })}
 }
