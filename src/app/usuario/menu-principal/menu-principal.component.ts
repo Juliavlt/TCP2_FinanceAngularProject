@@ -13,7 +13,7 @@ import { ActivatedRoute } from '@angular/router';
 export class MenuPrincipalComponent implements OnInit {
 
   user?: UserInfo;
-  idUser?: number;
+  idUser?: string;
 
   constructor(
     private service: FinancaService,
@@ -22,7 +22,7 @@ export class MenuPrincipalComponent implements OnInit {
     ) {}
 
   ngOnInit(){
-    this.idUser = Number(this.rota.snapshot.paramMap.get("id"));
+    this.idUser = this.rota.snapshot.paramMap.get("id");
     this.getUserInfos()
   }
 

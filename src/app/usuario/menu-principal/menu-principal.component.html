@@ -1,18 +1,32 @@
 <app-navbar></app-navbar>
-<div class="container">
-<div>
-  <h4>Meu saldo</h4><br><br>
-  <p> {{ user ? (user?.total | currency) : 0 | currency}} </p>
-  <br>
-</div>
-<div>
-    <h4>Receita</h4><br>
-    <p> {{user?.totalReceitas | currency}} </p><br>
+<div class="container-fluid  " style="height: 100vh;">
+  <div class="row d-flex justify-content-center align-self-center  " style="align-items: center;">
+    <div class="col-sm-3" >
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Receitas</h5>
+          <p class="card-text">{{user?.totalReceitas | currency}}</p>
+          <a routerLink="/detalhe-receita/{{idUser}}">Acessar</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">MEU SALDO TOTAL</h5>
+          <p class="card-text">{{ user ? (user?.total | currency) : 0 | currency}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Despesas</h5>
+          <p class="card-text">{{user?.totalDespesas| currency}}</p>
+          <a  routerLink="/detalhe-despesa/{{idUser}}">Acessar</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div>
-    <h4>Despesa</h4><br>
-    <p >{{user?.totalDespesas| currency}} </p><br>
-</div>
-
-</div>

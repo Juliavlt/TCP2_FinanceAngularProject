@@ -1,25 +1,31 @@
 <app-navbar></app-navbar>
-<div class="Detalhamento">
-  <h4> Despesas </h4>
-  <hr>
-  <table>
+<div class="table col-md-6 offset-md-3" style= "margin-top: 5%;">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Categoria</th>
+        <th scope="col">Valor</th>
+        <th scope="col">Data</th>
+        <th scope="col" class="pl-5">Options</th>
+      </tr>
+    </thead>
       <tbody *ngIf="user?.despesas?.length>0">
           <tr *ngFor="let despesa of user?.despesas">
-              <td >{{despesa.categoria}}</td>
-              <td >{{despesa.valor | currency}}</td>
-              <button type="button" routerLink="/atualizar-despesa/{{despesa.id}}">Atualizar</button>
-              <button type="button" (click)="excluir(despesa.id)">Excluir</button>
+              <td >{{despesa?.categoria}}</td>
+              <td >{{despesa?.valor | currency}}</td>
+              <td>{{despesa?.modifiedAt | date}}</td>
+              <button class="btn btn-info btn-sm mr-4 mt-2" type="button" routerLink="/atualizar-despesa/{{despesa.id}}">Atualizar</button>
+              <button class="btn btn-danger btn-sm mt-2" type="button" (click)="excluir(despesa.id)">Excluir</button>
           </tr>
-          <h4 >Valor total:</h4>
-          <div><strong>
-               <p>{{user?.totalDespesas| currency}}</p></strong>
+          <div>
+            <p><strong>Valor total: {{user?.totalDespesas| currency}}</strong></p>
           </div>
       </tbody>
   </table>
+  <button class="btn btn-info btn-sm mr-4 mt-2" type="button" routerLink="/cadastro-despesa/{{idUser}}" >Adicionar</button>
 </div>
-<button type="button" routerLink="/cadastro-despesa/{{idUser}}" >Adicionar</button>
 
-<h4>Cadastrar nova categoria:
+<h4   class="table col-md-6 offset-md-3" style= "margin-top: 5%;">Cadastrar nova categoria:
   <input [(ngModel)]="novaCategoria"name="categoria" type="text">
   <button name="categoria"  (click)="cadastrarCategoria(this.novaCategoria)">Criar!</button>
 </h4>

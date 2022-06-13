@@ -1,23 +1,33 @@
 <ng-container *ngIf="exists">
-    <form [formGroup]="receitaForm">
+  <app-navbar></app-navbar>
 
-      <h4>Minhas categorias:</h4>
-      <select name="categoria" formControlName="categoria">
-        <option *ngFor="let categoria of categoriasDoUsuario" value="{{categoria.categoria}}"> {{categoria.categoria}}</option>
-      </select>
+  <div class="container-fluid " style= "height: 90vh; display: flex; align-items: center;">
 
-      <h4>Categorias globais:</h4>
-        <select  name="categoria" formControlName="categoria">
-          <option *ngFor="let categoria of categoriasGlobais" value="{{categoria.categoria}}"> {{categoria.categoria}}</option>
-        </select>
+  <form [formGroup]="receitaForm" class="col-md-5 offset-md-3">
 
-      <h4>Valor</h4>
-        <input name="valor" formControlName="valor" type="number" placeholder="R$"><br>
+  <h4  class="form-group">Minhas categorias:</h4>
+  <select class="form-control" name="categoria" formControlName="categoria">
+    <option *ngFor="let categoria of categoriasDoUsuario" value="{{categoria.categoria}}"> {{categoria.categoria}}</option>
+  </select>
 
-      <h4>Data</h4>
-      <input name="data" formControlName="data"  type="date"><br>
+  <h4 class="form-group">Categorias globais:</h4>
+    <select class="form-control" name="categoria" formControlName="categoria">
+      <option *ngFor="let categoria of categoriasGlobais" value="{{categoria.categoria}}"> {{categoria.categoria}}</option>
+    </select>
+
+    <div class="form-group">
+      <label for="valor">Valor:</label>
+      <input class="form-control"name="valor" formControlName="valor" type="number" placeholder="R$" >
+    </div>
+
+    <div class="form-group">
+      <label for="data">Data:</label>
+      <input class="form-control" name="data" formControlName="data"  type="date"><br>
+    </div>
+
+    <button [disabled]="receitaForm.invalid" (click)="atualizar()" type="button">Atualizar receita</button>
+    <button (click)="voltar()" type="button"> Voltar</button>
   </form>
-  <button (click)="atualizar()" type="button"> Atualizar</button>
-  <button (click)="voltar()" type="button"> Voltar</button>
-
+  </div>
 </ng-container>
+

@@ -1,15 +1,19 @@
-<form [formGroup]="userForm" >
+<div class="container-fluid " style= "height: 100vh; display: flex; align-items: center;">
+  <form [formGroup]="userForm" class="col-md-5 offset-md-3">
+    <h4>Sign in: </h4>
+    <div class="form-group">
+      <label for="user">Email:</label>
+      <input class="form-control" name="user" formControlName="user" type="text" placeholder="@email" ><br>
+    </div>
 
-  <h4>Sign in: </h4>
+    <div class="form-group">
+      <label for="pass">Senha:</label>
+      <input class="form-control" name="pass" formControlName="pass"  type="password">
+    </div>
 
-    <h4>Username</h4>
-    <input name="user" formControlName="user" type="text" placeholder="@email" ><br>
-
-    <h4>Password</h4>
-    <input name="pass" formControlName="pass"  type="password"><br>
-
-    <h4>Confirm your password</h4>
-    <input name="confirmPass" formControlName="confirmPass"  type="password"><br>
-</form>
-
-<button [disabled]="userForm.invalid" (click)="cadastrar()" type="button">Cadastrar</button>
+    <div class="form-group">
+      <label for="confirmPass">Confirme a senha: </label>
+      <input class="form-control" name="confirmPass" formControlName="confirmPass"  type="password"><br>
+    </div>
+    <button class="btn btn-info mr-2" [disabled]="userForm.invalid" (click)="cadastrar()" type="button">Cadastrar</button>
+  </form>

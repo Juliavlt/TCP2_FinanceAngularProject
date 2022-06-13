@@ -1,13 +1,16 @@
-<div>
-  <div>
-      <div>
-
-        <form [formGroup]="loginForm">
-          <input type="text"  id="login" formControlName="username" placeholder="@email"> <br>
-          <input type="password" id="senha" formControlName="password" placeholder="senha"> <br><br>
-          <button type="button" [routerLink]="['/cadastro-usuario']"> Cadastrar </button>
-          <button type="button" (click)="autenticar()" > Acessar </button>
-        </form>
-      </div>
-  </div>
+<div class="container-fluid " style= "height: 100vh; display: flex; align-items: center;">
+  <form [formGroup]="loginForm" class="col-md-5 offset-md-3">
+    <div class="form-group">
+      <label for="username">Email</label>
+      <input type="email" formControlName="username" class="form-control" id="username" aria-describedby="emailHelp" placeholder="Seu email">
+      <small id="emailHelp" class="form-text text-muted">Nunca vamos compartilhar seu email, com ninguém.</small>
+    </div>
+    <div class="form-group">
+      <label for="password">Senha</label>
+      <input type="password"  formControlName="password" class="form-control" id="password" placeholder="Senha">
+    </div>
+    <button type="submit" routerLink="/cadastro-usuario" class="btn btn-primary"> Cadastrar</button>
+    <button type="submit" (click)="autenticar()" class="btn btn-primary  ml-2"> Login</button>
+  </form>
 </div>
+

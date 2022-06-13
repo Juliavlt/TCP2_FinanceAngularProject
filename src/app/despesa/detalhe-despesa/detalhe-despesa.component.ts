@@ -18,7 +18,7 @@ export class DetalheDespesaComponent implements OnInit {
   despesa: Financa;
   novaCategoria: string;
   user: UserInfo;
-  idUser:number;
+  idUser:string;
 
   constructor(
     private service: FinancaService,
@@ -27,7 +27,7 @@ export class DetalheDespesaComponent implements OnInit {
     private readonly rota: ActivatedRoute) {}
 
   ngOnInit(){
-    this.idUser = Number(this.rota.snapshot.paramMap.get("id"));
+    this.idUser = this.rota.snapshot.paramMap.get("id");
     this.userService.getUserById(this.idUser).subscribe((user: UserInfo) => {this.user = user});
   }
 
@@ -37,7 +37,8 @@ export class DetalheDespesaComponent implements OnInit {
 
   excluir(id:number){
     this.service.deleteFinanca(id).subscribe(()=> {
-    alert('Usuario excluido com sucesso.')
+    alert('Despesa excluída com sucesso.');
+    location.reload();
   })}
 
   cadastrarCategoria(categoria: string){

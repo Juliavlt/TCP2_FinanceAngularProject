@@ -15,7 +15,7 @@ import { Category } from 'src/model/category';
 export class AtualizarDespesaComponent implements OnInit {
 
   despesa?: Financa = {id:0, idUser: 0, tipo:1, categoria:"", dataMovimentacao: "", valor:1};
-  idFinanca?: number;
+  idFinanca?: string;
   idUser?: number;
   despesaForm?: FormGroup;
   exists:boolean = false;
@@ -31,13 +31,13 @@ export class AtualizarDespesaComponent implements OnInit {
     {}
 
   ngOnInit(): void {
-    this.idFinanca = Number(this.rota.snapshot.paramMap.get("id"));
+    this.idFinanca = this.rota.snapshot.paramMap.get("id");
     this.idUser = Number(localStorage.getItem("id"));
     this.getCategoriasGlobais();
     this.getDespesa(this.idFinanca);
   }
 
-  getDespesa(id:number){
+  getDespesa(id:string){
     this.service.getFinanca(id).subscribe((despesa: Financa) => {
       this.despesa = despesa;
       this.configurarFormulario();

@@ -1,24 +1,32 @@
 <ng-container *ngIf="exists">
-<form [formGroup]="receitaForm" >
+  <app-navbar></app-navbar>
 
-  <h4>Minhas categorias:</h4>
-  <select name="categoria" formControlName="categoria">
+  <div class="container-fluid " style= "height: 90vh; display: flex; align-items: center;">
+
+  <form [formGroup]="receitaForm" class="col-md-5 offset-md-3">
+
+  <h4  class="form-group">Minhas categorias:</h4>
+  <select class="form-control" name="categoria" formControlName="categoria">
     <option *ngFor="let categoria of categoriasDoUsuario" value="{{categoria.categoria}}"> {{categoria.categoria}}</option>
   </select>
 
-  <h4>Categorias globais:</h4>
-    <select  name="categoria" formControlName="categoria">
+  <h4 class="form-group">Categorias globais:</h4>
+    <select class="form-control" name="categoria" formControlName="categoria">
       <option *ngFor="let categoria of categoriasGlobais" value="{{categoria.categoria}}"> {{categoria.categoria}}</option>
     </select>
 
-    <h4>Valor</h4>
-    <input name="valor" formControlName="valor" type="number" placeholder="R$" ><br>
+    <div class="form-group">
+      <label for="valor">Valor:</label>
+      <input class="form-control"name="valor" formControlName="valor" type="number" placeholder="R$" >
+    </div>
 
-    <h4>Data</h4>
-    <input name="data" formControlName="data"  type="date"><br>
-</form>
+    <div class="form-group">
+      <label for="data">Data:</label>
+      <input class="form-control" name="data" formControlName="data"  type="date"><br>
+    </div>
 
-<button [disabled]="receitaForm.invalid" (click)="criar()" type="button">Cadastrar receita</button>
-<button (click)="voltar()" type="button"> Voltar</button>
-
+    <button [disabled]="receitaForm.invalid" (click)="criar()" type="button">Cadastrar receita</button>
+    <button (click)="voltar()" type="button"> Voltar</button>
+  </form>
+  </div>
 </ng-container>

@@ -1,9 +1,9 @@
 import { User } from './../model/user';
 import { HttpClient, HttpHeaderResponse, HttpParams, HttpResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
 import {  catchError, Observable, throwError } from 'rxjs';
 import { UserInfo } from 'src/model/userInfo';
 import { Location } from '@angular/common';
+import { Injectable } from '@angular/core';
 
 
 @Injectable({
@@ -22,18 +22,17 @@ export class UserService {
     const options = { params: param };
     return this.http.get(this.baseUrlAuthenticate, options)
     .pipe(catchError((err) => {
-      let erro = this.verifyError(err);
-      alert(erro)
+      alert(err.error)
       this.location.back();
       return throwError(err);
     }))
   }
 
-  public getUserById(userId: number): Observable<UserInfo> {
+  public getUserById(userId: string): Observable<UserInfo> {
     return this.http.get(this.baseUrl + '/' + userId)
     .pipe(catchError((err) => {
-      let erro = this.verifyError(err);
-      alert(erro)
+      console.log(err.error)
+      alert(err.error.erro)
       this.location.back();
       return throwError(err);
     }))
@@ -45,14 +44,9 @@ export class UserService {
     body = body.set('pass', user.password);
     return this.http.post(this.baseUrl, user)
     .pipe(catchError((err) => {
-      let erro = this.verifyError(err);
-      alert(erro)
+      alert(err.error)
       this.location.back();
       return throwError(err);
     }))
-  }
-
-  verifyError(error): string{
-    return error.error.erro;
   }
 }

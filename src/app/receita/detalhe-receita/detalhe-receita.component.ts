@@ -19,7 +19,7 @@ export class DetalheReceitaComponent implements OnInit {
   listaReceita: Financas;
   receita: Financa;
   novaCategoria: string;
-  idUser:number;
+  idUser:string;
   user:UserInfo;
 
   constructor(
@@ -29,7 +29,7 @@ export class DetalheReceitaComponent implements OnInit {
     private readonly rota: ActivatedRoute) {}
 
   ngOnInit(){
-    this.idUser = Number(this.rota.snapshot.paramMap.get("id"));
+    this.idUser = this.rota.snapshot.paramMap.get("id");
     this.userService.getUserById(this.idUser).subscribe((user: UserInfo) => {this.user = user});
   }
 
@@ -40,6 +40,7 @@ export class DetalheReceitaComponent implements OnInit {
   excluir(id:number){
     this.service.deleteFinanca(id).subscribe(()=> {
     alert('Receita excluída com sucesso.')
+    location.reload()
     }, (erro)=>{
         alert('Receita não pôde ser excluída.')
     },()=>{})

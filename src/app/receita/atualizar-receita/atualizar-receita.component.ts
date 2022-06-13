@@ -15,7 +15,7 @@ import { CategoryService } from 'src/service/categoryService';
 export class AtualizarReceitaComponent implements OnInit {
 
   receita?: Financa = {id:0, idUser: 0, tipo:0, categoria:"", dataMovimentacao: "", valor:0};
-  idFinanca?: number;
+  idFinanca?: string;
   idUser?: number;
   receitaForm?: FormGroup;
   exists:boolean = false;
@@ -32,13 +32,13 @@ export class AtualizarReceitaComponent implements OnInit {
   idDespesaToUpdate:number;
 
   ngOnInit(): void {
-    this.idFinanca = Number(this.rota.snapshot.paramMap.get("id"));
+    this.idFinanca = this.rota.snapshot.paramMap.get("id");
     this.idUser = Number(localStorage.getItem("id"));
     this.getCategoriasGlobais();
     this.getReceita(this.idFinanca);
   }
 
-  getReceita(id:number){
+  getReceita(id:string){
     this.service.getFinanca(id).subscribe((receita: Financa) => {
       this.receita = receita
       this.configurarFormulario();
